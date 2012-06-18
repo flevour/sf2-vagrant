@@ -3,6 +3,21 @@ class package_app_server
 {
 
   package
+  { 
+    'nfs-kernel-server':
+      ensure => present,
+  }
+
+  service
+  { 
+    'nfs-kernel-server':
+      ensure => running,
+      enable => true,
+      hasstatus => true,
+      require => Package['nfs-kernel-server'],
+  }
+
+  package
   {
     'sendmail':
       ensure  => present

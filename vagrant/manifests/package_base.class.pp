@@ -12,30 +12,12 @@ class package_base
       source  => '/vagrant/.puppet/vagrant/resources/apt-config'
   }
 
-  file 
-  {
-    'karmic.sources':
-      path    => '/etc/apt/sources.list.d/karmic.list',
-      ensure  => present,
-      source  => '/vagrant/.puppet/vagrant/resources/karmic-sources',
-      require => File['apt.config']
-  }
-
-  file 
-  {
-    'php.preferences':
-      path    => '/etc/apt/preferences.d/php',
-      ensure  => present,
-      source  => '/vagrant/.puppet/vagrant/resources/karmic-preferences',
-      require => File['karmic.sources']
-  }
-
   exec
   {
     'init':
       command => 'apt-get update',
       path    => '/usr/bin/',
-      require => File['karmic.sources']
+      require => File['apt.config']
   }
 
   package

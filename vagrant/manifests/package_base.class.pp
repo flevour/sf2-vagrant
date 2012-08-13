@@ -9,7 +9,7 @@ class package_base
     'apt.config':
       path    => '/etc/apt/apt.conf.d/99aptcache',
       ensure  => present,
-      source  => '/vagrant/vagrant/resources/apt-config'
+      source  => '/vagrant/.puppet/vagrant/resources/apt-config'
   }
 
   file 
@@ -17,7 +17,7 @@ class package_base
     'karmic.sources':
       path    => '/etc/apt/sources.list.d/karmic.list',
       ensure  => present,
-      source  => '/vagrant/vagrant/resources/karmic-sources',
+      source  => '/vagrant/.puppet/vagrant/resources/karmic-sources',
       require => File['apt.config']
   }
 
@@ -26,7 +26,7 @@ class package_base
     'php.preferences':
       path    => '/etc/apt/preferences.d/php',
       ensure  => present,
-      source  => '/vagrant/vagrant/resources/karmic-preferences',
+      source  => '/vagrant/.puppet/vagrant/resources/karmic-preferences',
       require => File['karmic.sources']
   }
 

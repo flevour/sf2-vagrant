@@ -7,7 +7,7 @@ class config_app_server
     'apache2.config':
       path    => '/etc/apache2/sites-available/default',
       ensure  => present,
-      source  => '/vagrant/vagrant/resources/apache2-vhost'
+      source  => '/vagrant/.puppet/vagrant/resources/apache2-vhost'
   }
 
   exec
@@ -23,7 +23,7 @@ class config_app_server
     'php5.config':
       path    => '/etc/php5/apache2/php.ini',
       ensure  => present,
-      source  => '/vagrant/vagrant/resources/php.ini'
+      source  => '/vagrant/.puppet/vagrant/resources/php.ini'
   }
 
   file 
@@ -40,7 +40,7 @@ class config_app_server
   {
     'mcrypt.fix':
       path    => '/etc/php5/conf.d/mcrypt.ini',
-      ensure  => '/vagrant/vagrant/resources/mcrypt.ini',
+      ensure  => '/vagrant/.puppet/vagrant/resources/mcrypt.ini',
       require => File['php5.config']
   }
 
@@ -70,14 +70,14 @@ class config_app_server
   file 
   {
     'system.logdir':
-      path    => '/vagrant/log',
+      path    => '/vagrant/app/log',
       ensure  => directory
   }
 
   file 
   {
     'apache.logdir':
-      path    => '/vagrant/log/apache2',
+      path    => '/vagrant/app/log/apache2',
       ensure  => directory,
       require => File['system.logdir']
   }
